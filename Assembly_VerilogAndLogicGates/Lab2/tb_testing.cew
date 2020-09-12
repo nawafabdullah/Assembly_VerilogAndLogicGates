@@ -1,0 +1,59 @@
+//================================================================--
+// Design Unit  : cew testbench for lab2
+//
+// File Name    : tb.cew
+//
+// Purpose      : design verification
+//
+// Note         :
+//
+// Limitations  :
+//
+// Errors       : none known
+//
+// Library      : lab2
+//
+// Dependences  : none
+//
+// Author       : Peter Walsh, Vancouver Island University
+//
+// System       : icarus (Linux)
+//
+//------------------------------------------------------------------
+// Revision List
+// Version      Author  Date    Changes
+// 1.0          PW      Sep 10  New version
+//================================================================--
+
+
+include(cew.v)
+
+module test_bench();
+
+   cew_Variables
+   wire t_E;
+   reg t_A, t_B, t_C, t_D;
+   integer i;
+
+   // Gold function
+    function gold;
+       input w,x,y,z;
+ 
+       gold=1;
+
+    endfunction
+
+
+   lab2 cut(t_E, t_A, t_B, t_C, t_D);
+
+   initial begin
+      $dumpfile("test_bench.vcd");
+      $dumpvars(0,test_bench);
+
+
+      cew_Summary
+      #1 $finish();
+   end
+
+endmodule
+

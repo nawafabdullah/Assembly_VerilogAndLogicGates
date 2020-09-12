@@ -1,0 +1,40 @@
+//================================================================--
+// Design Unit	: lab1 (structural)
+//
+// File Name	: lab1.v
+//
+// Purpose	: implement logic diagram from Exp 1.
+//
+// Note		:
+//
+// Limitations	:
+//
+// Errors	: none known
+//
+// Library      : sn7400, sn7432, sn7408
+//
+// Dependences	: none
+//
+// Author	: Peter Walsh, Vancouver Island University
+//
+// Environmant	: Icarus
+//-------------------------------------------------------------------
+// Revision List	
+// Version	Author	Date	Changes
+// 1.0		PW	Sept 10 New version
+//================================================================--
+
+module lab1 (D, A, B, C); 
+
+   output D;
+   input A, B, C;
+
+   parameter GND=1'b 0, VCC=1'b 1, DC=1'b 0;
+
+
+   sn7408 and_gates(DC,
+ DC, , DC, DC, , GND, ,DC ,DC , ,DC ,DC , VCC);
+   sn7432 or_gates(DC, DC, , DC, DC, , GND, , DC, DC , ,DC ,DC , VCC);
+   sn7400 nand_gates(DC, DC, , DC, DC, , GND, ,DC ,DC , ,DC ,DC , VCC);
+
+endmodule

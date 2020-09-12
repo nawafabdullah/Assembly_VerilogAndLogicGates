@@ -1,0 +1,43 @@
+$date
+	Thu Sep 26 22:47:26 2019
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module test_bench $end
+$var wire 1 ! t_C $end
+$var reg 1 " t_A $end
+$var reg 1 # t_B $end
+$var integer 32 $ cew_Error_Count [31:0] $end
+$var integer 32 % cew_Test_Count [31:0] $end
+$scope module cut $end
+$var wire 1 " A $end
+$var wire 1 # B $end
+$var reg 1 ! C $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b1 %
+b0 $
+0#
+0"
+0!
+$end
+#1
+1!
+1#
+b10 %
+#2
+0#
+1"
+b11 %
+#3
+0!
+1#
+b100 %
+#5

@@ -1,0 +1,105 @@
+//================================================================--
+// Design Unit  : cew testbench for memory_unit
+//
+// File Name    : tb.cew
+//
+// Purpose      : design verification
+//
+// Author       : Peter Walsh, Vancouver Island University
+//
+// System       : icarus (Linux)
+//
+//------------------------------------------------------------------
+// Revision List
+// Version      Author  Date    Changes
+// 1.0          PW      Nov 2016  New version
+//================================================================--
+
+
+include(cew.v)
+
+module test_bench();
+
+   cew_Variables
+
+   reg t_we, t_clk, t_reset;
+   wire [7:0] t_int_rbus;
+   reg [15:0] t_int_abus;
+   reg [7:0] t_int_wbus;
+   wire [7:0] t_porta;
+   reg [7:0] t_portb;
+   wire [7:0] t_portc;
+   wire [7:0] t_psw;
+   reg [7:0] t_portd;
+   reg  t_Z;
+   reg  t_N;
+
+
+   memory_unit  cut (t_we, t_int_rbus, t_int_wbus, t_int_abus, t_porta, t_portb, t_portc, t_portd, t_psw, t_Z, t_N, t_clk, t_reset);
+   integer i;
+
+   task clockTick; 
+      begin // nasty syntax
+         t_clk<=0; #3; 
+         t_clk<=1; #6;
+         t_clk<=0; #3;
+      end
+   endtask
+
+   initial begin
+      $dumpfile("test_bench.vcd");
+      $dumpvars(0,test_bench);
+
+      t_reset<=1;#1;t_reset<=0;#1; 
+    
+      // Test Reading from mac file
+ 
+      cew_Ncase(t_we=1'b0;t_int_abus=16'h0000;clockTick();, t_int_rbus, 8'h00, !==)
+      cew_Ncase(t_we=1'b0;t_int_abus=16'h0001;clockTick();, t_int_rbus, 8'h01, !==)
+      cew_Ncase(t_we=1'b0;t_int_abus=16'h0002;clockTick();, t_int_rbus, 8'h02, !==)
+      cew_Ncase(t_we=1'b0;t_int_abus=16'h0003;clockTick();, t_int_rbus, 8'h03, !==)
+
+      // Test Read/Write cycles for the first 256 memory words
+
+      cew_Ncase(t_we=1'b1;t_int_abus=16'h0003;t_int_wbus = 8'h25;clockTick();, t_int_rbus, 8'h25, !==)
+
+      for (i=0; i<255; i=i+1) begin
+         cew_Ncase(t_we=1'b1;t_int_abus=i;t_int_wbus=i;clockTick();, t_int_rbus, i, !==)
+      end
+
+      for (i=0; i<255; i=i+1) begin
+         cew_Ncase(t_we=1'b0;t_int_abus=i;clockTick();, t_int_rbus, i, !==)
+      end
+
+
+      // Test Flags and PSW
+
+
+      cew_Ncase(t_Z=0;t_N=0;#1;, t_psw, 8'b00000000, !==)
+      cew_Ncase(t_we=1'b0;t_int_abus=16'hFFFB;clockTick();, t_int_rbus, 8'b00000000, !==)
+
+      cew_Ncase(t_Z=0;t_N=1;#1;, t_psw, 8'b01000000, !==)
+      cew_Ncase(t_we=1'b0;t_int_abus=16'hFFFB;clockTick();, t_int_rbus, 8'b01000000, !==)
+
+      cew_Ncase(t_Z=1;t_N=0;#1;, t_psw, 8'b10000000, !==)
+      cew_Ncase(t_we=1'b0;t_int_abus=16'hFFFB;clockTick();, t_int_rbus, 8'b10000000, !==)
+
+      cew_Ncase(t_Z=1;t_N=1;#1;, t_psw, 8'b11000000, !==)
+      cew_Ncase(t_we=1'b0;t_int_abus=16'hFFFB;clockTick();, t_int_rbus, 8'b11000000, !==)
+
+      cew_Ncase(t_we=1'b1;t_int_abus=16'hFFFB;t_int_wbus=8'hFF;clockTick();, t_psw, 8'hFF, !==)
+
+      // Test Reading and Writting to/from ports.
+
+      cew_Ncase(t_we=1'b1;t_int_abus=16'hFFFC;t_int_wbus=8'hFF;clockTick();, t_porta, 8'hFF, !==)
+      cew_Ncase(t_we=1'b1;t_int_abus=16'hFFFE;t_int_wbus=8'hEE;clockTick();, t_portc, 8'hEE, !==)
+
+      cew_Ncase(t_portb=8'hDD;t_we=1'b0;t_int_abus=16'hFFFD;clockTick();, t_int_rbus, 8'hDD, !==)
+      cew_Ncase(t_portd=8'hCC;t_we=1'b0;t_int_abus=16'hFFFF;clockTick();, t_int_rbus, 8'hCC, !==)
+
+      cew_Summary
+      #1 $finish();
+   end
+
+endmodule
+
