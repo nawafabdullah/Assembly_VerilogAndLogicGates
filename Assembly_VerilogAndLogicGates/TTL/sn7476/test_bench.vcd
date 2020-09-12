@@ -1,0 +1,314 @@
+$date
+	Thu Nov 21 15:50:41 2013
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module test_bench $end
+$var wire 1 ! t_P10 $end
+$var wire 1 " t_P11 $end
+$var wire 1 # t_P14 $end
+$var wire 1 $ t_P15 $end
+$var integer 32 % cew_Error_Count [31:0] $end
+$var integer 32 & cew_Test_Count [31:0] $end
+$var reg 1 ' t_P1 $end
+$var reg 1 ( t_P12 $end
+$var reg 1 ) t_P13 $end
+$var reg 1 * t_P16 $end
+$var reg 1 + t_P2 $end
+$var reg 1 , t_P3 $end
+$var reg 1 - t_P4 $end
+$var reg 1 . t_P5 $end
+$var reg 1 / t_P6 $end
+$var reg 1 0 t_P7 $end
+$var reg 1 1 t_P8 $end
+$var reg 1 2 t_P9 $end
+$scope module cut $end
+$var wire 1 3 P1 $end
+$var wire 1 4 P12 $end
+$var wire 1 5 P13 $end
+$var wire 1 6 P16 $end
+$var wire 1 7 P2 $end
+$var wire 1 8 P3 $end
+$var wire 1 9 P4 $end
+$var wire 1 : P5 $end
+$var wire 1 ; P6 $end
+$var wire 1 < P7 $end
+$var wire 1 = P8 $end
+$var wire 1 > P9 $end
+$var reg 1 ? P10 $end
+$var reg 1 @ P11 $end
+$var reg 1 A P14 $end
+$var reg 1 B P15 $end
+$var reg 1 C master1 $end
+$var reg 1 D master2 $end
+$upscope $end
+$scope task clockTick1 $end
+$upscope $end
+$scope task clockTick2 $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+xD
+xC
+xB
+xA
+x@
+x?
+x>
+x=
+x<
+x;
+1:
+x9
+x8
+x7
+x6
+05
+x4
+x3
+x2
+x1
+x0
+x/
+1.
+x-
+x,
+x+
+x*
+0)
+x(
+x'
+b0 &
+b0 %
+x$
+x#
+x"
+x!
+$end
+#1
+1C
+0A
+0#
+1B
+1$
+1,
+18
+0+
+07
+b1 &
+#2
+0C
+1A
+1#
+0B
+0$
+0,
+08
+1+
+17
+b10 &
+#3
+1,
+18
+b11 &
+#4
+1D
+0?
+0!
+1@
+1"
+11
+1=
+00
+0<
+b100 &
+#5
+0D
+1?
+1!
+0@
+0"
+01
+0=
+10
+1<
+b101 &
+#6
+11
+1=
+b110 &
+#7
+0'
+03
+0-
+09
+1*
+16
+b111 &
+#10
+1'
+13
+#16
+0'
+03
+#19
+1-
+19
+0*
+06
+b1001 &
+#22
+1C
+1'
+13
+#28
+0A
+0#
+1B
+1$
+0'
+03
+#31
+0-
+09
+b1011 &
+#34
+1'
+13
+#40
+0'
+03
+#43
+1-
+19
+1*
+16
+b1101 &
+#46
+0C
+1'
+13
+#52
+1A
+1#
+0B
+0$
+0'
+03
+#55
+0/
+0;
+02
+0>
+1(
+14
+b1111 &
+#58
+1/
+1;
+#64
+0/
+0;
+#67
+12
+1>
+0(
+04
+b10001 &
+#70
+1D
+1/
+1;
+#76
+0?
+0!
+1@
+1"
+0/
+0;
+#79
+02
+0>
+b10011 &
+#82
+1/
+1;
+#88
+0/
+0;
+#91
+12
+1>
+1(
+14
+b10101 &
+#94
+0D
+1/
+1;
+#100
+1?
+1!
+0@
+0"
+0/
+0;
+#103
+0,
+08
+b10111 &
+#104
+1,
+18
+b11000 &
+#105
+0*
+06
+b11001 &
+#108
+1C
+1'
+13
+#114
+0A
+0#
+1B
+1$
+0'
+03
+#117
+0-
+09
+b11010 &
+#120
+1'
+13
+#126
+0'
+03
+#129
+1'
+13
+#130
+0C
+1*
+16
+#131
+0*
+06
+#132
+1A
+1#
+0B
+0$
+0'
+03
+#133
+b11011 &
+#143

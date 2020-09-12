@@ -1,0 +1,132 @@
+//================================================================--
+// Design Unit  : cew testbench for sn74151
+//
+// File Name    : tb.cew
+//
+// Purpose      : design verification
+//
+// Author       : Peter Walsh, Vancouver Island University
+//
+// System       : icarus (Linux)
+//
+//------------------------------------------------------------------
+// Revision List
+// Version      Author  Date    Changes
+// 1.0          PW      Sep 10  New version
+//================================================================--
+
+
+include(cew.v)
+
+module test_bench();
+
+   cew_Variables
+   wire t_P5, t_P6;
+   reg t_P1, t_P2, t_P3, t_P4, t_P7, t_P8, t_P9, t_P10, t_P11, t_P12, t_P13, t_P14, t_P15, t_P16;
+
+   sn74151 cut(t_P1,t_P2,t_P3,t_P4,t_P5,t_P6,t_P7,t_P8,t_P9,t_P10,t_P11,t_P12,t_P13,t_P14,t_P15,t_P16);
+
+   initial begin
+      t_P8=0; t_P16=1; 
+
+      t_P7=1; #1;
+
+      cew_Ncase( , t_P5, 0, !==)
+      cew_Ncase( , t_P6, 1, !==)
+
+      t_P7=0;
+   
+      // I0
+      t_P11=0; // LSB
+      t_P10=0;
+      t_P9=0;
+      t_P4=0; #1;
+      cew_Ncase( , t_P5, 0, !==)
+      cew_Ncase( , t_P6, 1, !==)
+      t_P4=1; #1;
+      cew_Ncase( , t_P5, 1, !==)
+      cew_Ncase( , t_P6, 0, !==)
+
+      // I1
+      t_P11=1; //LSB
+      t_P10=0;
+      t_P9=0;
+      t_P3=0; #1;
+      cew_Ncase( , t_P5, 0, !==)
+      cew_Ncase( , t_P6, 1, !==)
+      t_P3=1; #1;
+      cew_Ncase( , t_P5, 1, !==)
+      cew_Ncase( , t_P6, 0, !==)
+
+      // I2
+      t_P11=0; //LSB
+      t_P10=1;
+      t_P9=0;
+      t_P2=0; #1;
+      cew_Ncase( , t_P5, 0, !==)
+      cew_Ncase( , t_P6, 1, !==)
+      t_P2=1; #1;
+      cew_Ncase( , t_P5, 1, !==)
+      cew_Ncase( , t_P6, 0, !==)
+
+      // I3
+      t_P11=1; //LSB
+      t_P10=1;
+      t_P9=0;
+      t_P1=0; #1;
+      cew_Ncase( , t_P5, 0, !==)
+      cew_Ncase( , t_P6, 1, !==)
+      t_P1=1; #1;
+      cew_Ncase( , t_P5, 1, !==)
+      cew_Ncase( , t_P6, 0, !==)
+
+      // I4
+      t_P11=0; //LSB
+      t_P10=0;
+      t_P9=1;
+      t_P15=0; #1;
+      cew_Ncase( , t_P5, 0, !==)
+      cew_Ncase( , t_P6, 1, !==)
+      t_P15=1; #1;
+      cew_Ncase( , t_P5, 1, !==)
+      cew_Ncase( , t_P6, 0, !==)
+
+      // I5
+      t_P11=1; //LSB
+      t_P10=0;
+      t_P9=1;
+      t_P14=0; #1;
+      cew_Ncase( , t_P5, 0, !==)
+      cew_Ncase( , t_P6, 1, !==)
+      t_P14=1; #1;
+      cew_Ncase( , t_P5, 1, !==)
+      cew_Ncase( , t_P6, 0, !==)
+
+      // I6
+      t_P11=0; //LSB
+      t_P10=1;
+      t_P9=1;
+      t_P13=0; #1;
+      cew_Ncase( , t_P5, 0, !==)
+      cew_Ncase( , t_P6, 1, !==)
+      t_P13=1; #1;
+      cew_Ncase( , t_P5, 1, !==)
+      cew_Ncase( , t_P6, 0, !==)
+
+      // I7
+      t_P11=1; //LSB
+      t_P10=1;
+      t_P9=1;
+      t_P12=0; #1;
+      cew_Ncase( , t_P5, 0, !==)
+      cew_Ncase( , t_P6, 1, !==)
+      t_P12=1; #1;
+      cew_Ncase( , t_P5, 1, !==)
+      cew_Ncase( , t_P6, 0, !==)
+    
+      cew_Summary
+      #10 $finish();
+   end
+
+endmodule
+

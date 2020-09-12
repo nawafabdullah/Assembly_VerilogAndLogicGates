@@ -1,0 +1,72 @@
+//================================================================--
+// Design Unit  : cew testbench for sn7402
+//
+// File Name    : tb.cew
+//
+// Purpose      : design verification
+//
+// Author       : Peter Walsh, Vancouver Island University
+//
+// System       : icarus (Linux)
+//
+//------------------------------------------------------------------
+// Revision List
+// Version      Author  Date    Changes
+// 1.0          PW      Sep 10  New version
+//================================================================--
+
+
+include(cew.v)
+
+module test_bench();
+
+   cew_Variables
+   wire t_P1, t_P4, t_P10, t_P13;
+   reg t_P2, t_P3, t_P5, t_P6, t_P7, t_P8, t_P9, t_P11, t_P12, t_P14;
+   integer i;
+
+   // Gold function returns x nor y
+   function gold;
+      input x;
+      input y;
+
+      gold=(x~|y);
+   endfunction
+
+   sn7402 cut(t_P1, t_P2, t_P3, t_P4, t_P5, t_P6, t_P7, t_P8, t_P9, t_P10, t_P11, t_P12, t_P13, t_P14);
+
+   initial begin
+      $dumpfile("test_bench.vcd");
+      $dumpvars(0,test_bench);
+
+      t_P14=1; t_P7=0;
+
+      // note, gates are tested sequentially
+      // also, 3 different styles of testing are shown
+
+
+      // style 1 .. explicit enumeration
+      cew_Ncase(t_P2=0;t_P3=0;#1;, t_P1, t_P2 ~| t_P3, !==)
+      cew_Ncase(t_P2=0;t_P3=1;#1;, t_P1, t_P2 ~| t_P3, !==)
+      cew_Ncase(t_P2=1;t_P3=0;#1;, t_P1, t_P2 ~| t_P3, !==)
+      cew_Ncase(t_P2=1;t_P3=1;#1;, t_P1, t_P2 ~| t_P3, !==)
+
+      // style 2 .. explicit enumeration with a gold function (oracal)
+      cew_Ncase(t_P5=0;t_P6=0;#1;, t_P4, gold(t_P5, t_P6), !==)
+      cew_Ncase(t_P5=0;t_P6=1;#1;, t_P4, gold(t_P5, t_P6), !==)
+      cew_Ncase(t_P5=1;t_P6=0;#1;, t_P4, gold(t_P5, t_P6), !==)
+      cew_Ncase(t_P5=1;t_P6=1;#1;, t_P4, gold(t_P5, t_P6), !==)
+
+      // style 3 .. implicit enumeration with a gold function (oracal)
+      for (i=0; i<4; i=i+1)
+        begin
+        cew_Ncase(t_P8=i[1];t_P9=i[0];#1;, t_P10, gold(t_P8, t_P9), !==)
+        cew_Ncase(t_P11=i[1];t_P12=i[0];#1;, t_P13, gold(t_P11, t_P12), !==)
+        end
+ 
+      cew_Summary
+      #1 $finish();
+   end
+
+endmodule
+

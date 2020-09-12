@@ -1,0 +1,89 @@
+//================================================================--
+// Design Unit  : cew testbench for sn7474
+//
+// File Name    : tb.cew
+//
+// Purpose      : design verification
+//
+// Author       : Peter Walsh, Vancouver Island University
+//
+// System       : icarus (Linux)
+//
+//------------------------------------------------------------------
+// Revision List
+// Version      Author  Date    Changes
+// 1.0          PW      Sep 10  New version
+//================================================================--
+
+include(cew.v)
+
+module test_bench();
+
+   cew_Variables
+   wire t_P5, t_P6, t_P8, t_P9;
+   reg t_P1, t_P2, t_P3, t_P4, t_P7, t_P10, t_P11, t_P12, t_P13, t_P14;
+
+   sn7474 cut(t_P1, t_P2, t_P3, t_P4, t_P5, t_P6, t_P7, t_P8, t_P9, t_P10, t_P11, t_P12, t_P13, t_P14);
+
+   task clockTick1; // nasty syntax but task body can only be one (compound) statement
+      begin
+         t_P3=0; #3;
+         t_P3=1; #6;
+         t_P3=0; #3;
+      end
+   endtask
+
+   task clockTick2;
+      begin
+         t_P11=0; #3;
+         t_P11=1; #6;
+         t_P11=0; #3;
+      end
+   endtask
+
+
+   initial begin
+      $dumpfile("test_bench.vcd");
+      $dumpvars(0,test_bench);
+
+      t_P14=1; t_P7=0; 
+      
+      // Async Operation
+
+      cew_Ncase(t_P1=1; t_P4=0; #1; t_P4=1; #1;,t_P5, 1, !==)
+      cew_Ncase(, t_P6, 0, !==)
+
+      cew_Ncase(t_P1=0; t_P4=1; #1; t_P1=1; #1;,t_P5, 0, !==)
+      cew_Ncase(, t_P6, 1, !==)
+
+      cew_Ncase(t_P13=1; t_P10=0; #1; t_P10=1; #1;,t_P9, 1, !==)
+      cew_Ncase(, t_P8, 0, !==)
+
+      cew_Ncase(t_P13=0; t_P10=1; #1; t_P13=1; #1;,t_P9, 0, !==)
+      cew_Ncase(, t_P8, 1, !==)
+
+
+      // Normal Operation
+      
+      t_P1=1; t_P4=1; t_P10=1; t_P13=1; 
+
+      cew_Ncase(t_P2=1;clockTick1();, t_P5, 1, !==)
+      cew_Ncase(, t_P6, 0, !==)
+
+      cew_Ncase(t_P12=1;clockTick2();, t_P9, 1, !==)
+      cew_Ncase(, t_P8, 0, !==)
+
+      cew_Ncase(t_P2=0;clockTick1();, t_P5, 0, !==)
+      cew_Ncase(, t_P6, 1, !==)
+
+      cew_Ncase(t_P12=0;clockTick2();, t_P9, 0, !==)
+      cew_Ncase(, t_P8, 1, !==)
+
+
+
+      cew_Summary
+      #1 $finish();
+   end
+
+endmodule
+

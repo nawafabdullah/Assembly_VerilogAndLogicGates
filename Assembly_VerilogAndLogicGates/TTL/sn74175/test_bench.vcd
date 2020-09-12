@@ -1,0 +1,221 @@
+$date
+	Thu Nov 21 15:50:35 2013
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module test_bench $end
+$var wire 1 ! t_P10 $end
+$var wire 1 " t_P11 $end
+$var wire 1 # t_P14 $end
+$var wire 1 $ t_P15 $end
+$var wire 1 % t_P2 $end
+$var wire 1 & t_P3 $end
+$var wire 1 ' t_P6 $end
+$var wire 1 ( t_P7 $end
+$var integer 32 ) cew_Error_Count [31:0] $end
+$var integer 32 * cew_Test_Count [31:0] $end
+$var reg 1 + t_P1 $end
+$var reg 1 , t_P12 $end
+$var reg 1 - t_P13 $end
+$var reg 1 . t_P16 $end
+$var reg 1 / t_P4 $end
+$var reg 1 0 t_P5 $end
+$var reg 1 1 t_P8 $end
+$var reg 1 2 t_P9 $end
+$scope module cut $end
+$var wire 1 3 P1 $end
+$var wire 1 4 P12 $end
+$var wire 1 5 P13 $end
+$var wire 1 6 P16 $end
+$var wire 1 7 P4 $end
+$var wire 1 8 P5 $end
+$var wire 1 9 P8 $end
+$var wire 1 : P9 $end
+$var reg 1 ; P10 $end
+$var reg 1 < P11 $end
+$var reg 1 = P14 $end
+$var reg 1 > P15 $end
+$var reg 1 ? P2 $end
+$var reg 1 @ P3 $end
+$var reg 1 A P6 $end
+$var reg 1 B P7 $end
+$upscope $end
+$scope task clockTick $end
+$upscope $end
+$scope task testMasterReset $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+0B
+1A
+1@
+0?
+0>
+1=
+1<
+0;
+x:
+09
+x8
+x7
+16
+x5
+x4
+03
+x2
+01
+x0
+x/
+1.
+x-
+x,
+0+
+b1 *
+b0 )
+0(
+1'
+1&
+0%
+0$
+1#
+1"
+0!
+$end
+#1
+1+
+13
+#2
+02
+0:
+1/
+17
+b1001 *
+#5
+x=
+x#
+x>
+x$
+x<
+x"
+x;
+x!
+xA
+x'
+xB
+x(
+0@
+0&
+1?
+1%
+12
+1:
+#11
+02
+0:
+#14
+10
+18
+b1011 *
+#17
+0A
+0'
+1B
+1(
+12
+1:
+#23
+02
+0:
+#26
+1,
+14
+b1101 *
+#29
+0<
+0"
+1;
+1!
+12
+1:
+#35
+02
+0:
+#38
+1-
+15
+b1111 *
+#41
+0=
+0#
+1>
+1$
+12
+1:
+#47
+02
+0:
+#50
+0/
+07
+b10001 *
+#53
+1@
+1&
+0?
+0%
+12
+1:
+#59
+02
+0:
+#62
+00
+08
+b10011 *
+#65
+1A
+1'
+0B
+0(
+12
+1:
+#71
+02
+0:
+#74
+0,
+04
+b10101 *
+#77
+1<
+1"
+0;
+0!
+12
+1:
+#83
+02
+0:
+#86
+0-
+05
+b10111 *
+#89
+1=
+1#
+0>
+0$
+12
+1:
+#95
+02
+0:
+#98
+b11000 *
+#99
